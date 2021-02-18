@@ -21,8 +21,8 @@ jobs:
         with:
           python-version: '3.x'
       - name: requirements
-        runs: pip install -r requirements.txt
+        run: pip install -r requirements.txt
       - name: code style
-        runs: pycodestyle app.py
+        run: pycodestyle app.py
       - name: sast
-        runs: bandit app.py
+        run: bandit app.py
