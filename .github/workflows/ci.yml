@@ -44,3 +44,17 @@ jobs:
       run: pip install -r requirements.txt
     - name: sast
       run: bandit app.py
+
+  unit_test:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: setup python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+    - name: requirements
+      run: pip install -r requirements.txt
+    - name: pytest
+      run: python -m pytest
