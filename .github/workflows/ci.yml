@@ -5,7 +5,7 @@ on:
   push:
 
 jobs:
-  CI:
+  lint:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -16,13 +16,27 @@ jobs:
           VALIDATE_ALL_CODEBASE: false
           DEFAULT_BRANCH: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: setup python
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.x'
-      - name: requirements
-        run: pip install -r requirements.txt
-      - name: code style
-        run: pycodestyle app.py
-      - name: sast
-        run: bandit app.py
+  
+  code_style:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: setup python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+    - name: requirements
+      run: pip install -r requirements.txt
+    - name: code style
+      run: pycodestyle app.py
+
+  sast:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: setup python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+    - name: requirements
+      run: pip install -r requirements.txt
+    - name: sast
+      run: bandit app.py
